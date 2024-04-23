@@ -3,8 +3,8 @@ class SortRepeaters:
     def sort_repeaters_by_mode_and_distance(repeaters):
         sorted_repeaters = {}
         for repeater in repeaters:
-            mode = repeater['mode']
-            distance = repeater['distance']
+            mode = repeater["mode"]
+            distance = repeater["distance"]
             if mode not in sorted_repeaters:
                 sorted_repeaters[mode] = []
             sorted_repeaters[mode].append((repeater, distance))

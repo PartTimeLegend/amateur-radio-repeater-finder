@@ -1,11 +1,13 @@
 import os
-from repeater_book_api import RepeaterBookAPI
+
 from csv_exporter import CSVExporter
+from repeater_book_api import RepeaterBookAPI
 from sort_repeaters import SortRepeaters
+
 
 def main():
     location = input("Enter Maidenhead locator (e.g., IO83vn): ").upper()
-    api_key = os.environ.get('REPEATERBOOK_API_KEY')
+    api_key = os.environ.get("REPEATERBOOK_API_KEY")
 
     if not api_key:
         print("REPEATERBOOK_API_KEY environment variable not found.")
@@ -22,9 +24,15 @@ def main():
             for repeater, distance in repeaters:
                 print(f"  {repeater['callsign']} - Distance: {distance} km")
 
-        export_choice = input("Do you want to export to CHIRP (C), Icom (I), or Yaesu (Y)? ").strip().lower()
-        if export_choice in ['c', 'i', 'y']:
-            filename = input("Enter the filename to save the CSV (e.g., repeaters.csv): ").strip()
+        export_choice = (
+            input("Do you want to export to CHIRP (C), Icom (I), or Yaesu (Y)? ")
+            .strip()
+            .lower()
+        )
+        if export_choice in ["c", "i", "y"]:
+            filename = input(
+                "Enter the filename to save the CSV (e.g., repeaters.csv): "
+            ).strip()
             CSVExporter.export(sorted_repeaters, filename, export_choice)
             print(f"Repeater data saved to {filename}")
         else:
@@ -33,6 +41,7 @@ def main():
 
     else:
         print("Failed to retrieve repeaters.")
+
 
 if __name__ == "__main__":
     main()
